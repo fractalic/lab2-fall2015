@@ -4,6 +4,14 @@ Lab2.txt
 ## Code style and smells
 What is good, bad, confusing about the code? Focus only on `Main.java` and `UBCPoet.java`.
 
+Good:
+* UBCPoet references previous work and includes an @author tag.
+* Variable names are descriptive.
+
+Bad:
+* No comments (javadocs) on any member functions.
+* `pick` can return null.
+
 <your text goes here>
 
 ## The First-Line Bug
