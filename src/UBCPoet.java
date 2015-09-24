@@ -65,7 +65,9 @@ public class UBCPoet {
         ISynset synset = dict.getWord(id).getSynset();
         List<String> words = new ArrayList<String>();
         for (String word : synset.getGloss().split("\\W+")) {
+            System.out.println("gloss: " + word);
             if (sense(word, POS.NOUN)) {
+                //words.add(word);
                 words.add(eloquent(word));
             } else {
                 words.add(word);
@@ -91,10 +93,18 @@ public class UBCPoet {
         String hyp = pick(hyponyms(noun));
         if (hyp == null) {
             hyp = pick(hypernyms(noun));
+            // <DEBUG>
+            if (hyp != null) {
+                System.out.println("hyper: "+hyp);
+            }
+            // </DEBUG>
         }
         if (hyp == null) {
             hyp = noun;
         }
+        // <DEBUG>
+        System.out.println("hypo: "+hyp);
+        // </DEBUG>
         String adjective = alliterate(hyp, POS.NOUN);
         if (adjective == null) {
             return hyp;
@@ -103,6 +113,9 @@ public class UBCPoet {
     }
 
     private String alliterate(String word, POS pos) {
+     // <DEBUG>
+        System.out.println("alliterate: "+word);
+        // </DEBUG>
         List<String> alliterations = alliterations(word);
         if (pos == POS.NOUN) {
             return pick(only(alliterations, POS.ADJECTIVE));
@@ -121,7 +134,13 @@ public class UBCPoet {
     }
 
     private List<String> alliterations(String word) {
+        // <DEBUG>
+        System.out.println("allit: " + word);
+        // </DEBUG>
         String head = word.substring(0, 2);
+        // <DEBUG>
+        System.out.println("passed allit head.");
+        // </DEBUG>
         String foot = word.substring(word.length()-1);
         List<String> result = new ArrayList<String>();
         for (String other : vocab) {

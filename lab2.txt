@@ -7,20 +7,43 @@ What is good, bad, confusing about the code? Focus only on `Main.java` and `UBCP
 Good:
 * UBCPoet references previous work and includes an @author tag.
 * Variable names are descriptive.
+* No unnecessary global variables.
+* `main` function has a comment with a specification.
 
 Bad:
-* No comments (javadocs) on any member functions.
-* `pick` can return null.
+* No specification (javadoc) on any member functions.
+* `pick` function can return null.
+* `eloquent` function relies on `pick` returning null.
+
+Confusing:
+* There's no indication that the poem will be random, except near the very last line of the file.
 
 <your text goes here>
 
 ## The First-Line Bug
 
-<your text goes here>
+The first-line bug is not a bug in a code, but a limitation of
+the English language (or at least this particular description
+of it). This code looks up the definition of a given word,
+and replaces each word in the definition with something clever.
+The word "a", which has no hyponyms and a single hypernym --
+"metric linear unit" -- will be replaced by "metric linear unit"
+everywhere it appears, according to this algorithm.
+
+As the word "a" is frequent in definitions, it is desirable
+to rework the poem generation to reduce the frequency of the
+output phrase "metric linear unit".
 
 ## The Out-of-Bounds Bug
 
-<your text goes here>
+The `alliterations` function checks for words that start with
+the same two letters and end with the same last letter.
+This function relies on the given word containing at least two
+letters, which many words in this dictionary do not.
+The definition of "gun" contains many words which have either
+hypernyms or hyponyms exactly one letter long. When these words
+are passed to `alliterations`, the Exception occurs.
+
 
 ## The Illegal Argument Bug
 
