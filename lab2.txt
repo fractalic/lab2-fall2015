@@ -47,4 +47,10 @@ are passed to `alliterations`, the Exception occurs.
 
 ## The Illegal Argument Bug
 
-<your text goes here>
+The string returned by the dictionary lookup is split at all
+non-word characters (such as punctuation and whitespace).
+When two of these characters occur next to each other, the
+resulting list of words will contain an empty string.
+The spec of the getIndexWord function states that it
+must not be called on an empty string, so our program
+should verify that the word is non-empty

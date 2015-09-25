@@ -65,7 +65,10 @@ public class UBCPoet {
         ISynset synset = dict.getWord(id).getSynset();
         List<String> words = new ArrayList<String>();
         for (String word : synset.getGloss().split("\\W+")) {
-            System.out.println("gloss: " + word);
+            System.out.println("gloss: " + synset.getGloss());
+            /*if (word.isEmpty()) {
+                continue;
+            }*/
             if (sense(word, POS.NOUN)) {
                 //words.add(word);
                 words.add(eloquent(word));
