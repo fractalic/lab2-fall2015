@@ -5,32 +5,43 @@ Lab2.txt
 What is good, bad, confusing about the code? Focus only on `Main.java` and `UBCPoet.java`.
 
 Good:
-* UBCPoet references previous work and includes an @author tag.
+* The UBCPoet doc references previous work and includes an @author tag.
 * Variable names are descriptive.
-* No unnecessary global variables.
+* No unnecessary global variables. Other variables are tightly scoped.
 * `main` function has a comment with a specification.
+* `vocab` and `dict` are made `final`
+* Internal methods are made private.
+* Functions are coherent (they only do one job).
 
 Bad:
 * No specification (javadoc) on any member functions.
 * `pick` function can return null.
 * `eloquent` function relies on `pick` returning null.
+* No assertions, no exceptions.
+* `hyponyms` and `hypernyms` are duplicated (differing only at one line).
+  The duplicated code should be wrapped in a single function.
+* It's not obvious why so many methods need to be made public.
+  (Why is `hypernyms` public but `alliterations` is not)?
 
 Confusing:
-* There's no indication that the poem will be random, except near the very last line of the file.
+* There's no indication that the poem will be random, except near the very
+  last line of the file.
+* At a glance, the poem appears to be generated with a newline every four words,
+  but most lines of output contain more than four words.
 
 <your text goes here>
 
 ## The First-Line Bug
 
-The first-line bug is not a bug in a code, but a limitation of
+The first-line bug is not (necessarily) a bug in a code, but a limitation of
 the English language (or at least this particular description
 of it). This code looks up the definition of a given word,
 and replaces each word in the definition with something clever.
-The word "a", which has no hyponyms and a single hypernym --
-"metric linear unit" -- will be replaced by "metric linear unit"
-everywhere it appears, according to this algorithm.
+The word "a", which has no hyponyms and the single hypernym
+"metric linear unit" will be replaced by "metric linear unit"
+(plus an adjective) everywhere it appears, according to this algorithm.
 
-As the word "a" is frequent in definitions, it is desirable
+As the word "a" is frequent in definitions, it may be desirable
 to rework the poem generation to reduce the frequency of the
 output phrase "metric linear unit".
 
@@ -53,4 +64,7 @@ When two of these characters occur next to each other, the
 resulting list of words will contain an empty string.
 The spec of the getIndexWord function states that it
 must not be called on an empty string, so our program
-should verify that the word is non-empty
+should verify that the word is non-empty.
+
+It would also be helpful for getIndexWord throw an
+exception or assertion error if it is provided with an empty string.
